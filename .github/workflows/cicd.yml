@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
 
+env:
+  IMAGE_NAME: ghtoken_product_demo
+
 jobs:
 
  cicd:
@@ -31,3 +34,6 @@ jobs:
         with:
           name: pytest-report
           path: pytest-report.html
+
+      - name: "Build docker image"
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
