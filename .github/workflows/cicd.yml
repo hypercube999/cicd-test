@@ -1,0 +1,33 @@
+name: Test CICD
+
+on:
+  push:
+    branches: [ master]
+
+jobs:
+
+ cicd:
+    runs-on: [ubuntu-latest]
+    steps:
+
+      - name: "Checkout repository"
+        uses: actions/checkout@v2
+
+      - name: "Install python"
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.8'
+          architecture: 'x64'
+
+      - name: "Install project dependencies"
+        run: if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: "Run tests"
+        run: pytest
+
+      - name: "Archive pytest results"
+        uses: actions/upload-artifact@v2
+        if: ${{!cancelled()}}
+        with:
+          name: pytest-report
+          path: pytest-report.html
