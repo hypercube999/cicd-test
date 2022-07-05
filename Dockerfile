@@ -7,4 +7,4 @@ ADD requirements.txt /
 RUN pip install -r requirements.txt
 
 CMD ["python", "./main.py"]
-EXPOSE 80
+EXPOSE 80:80
