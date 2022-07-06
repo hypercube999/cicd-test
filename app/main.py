@@ -1,10 +1,5 @@
-from uvicorn import Server, Config
+import uvicorn
 
 from app import app
 
-Server(
-    Config(
-        app=app,
-        host="0.0.0.0"
-    )
-).run()
+uvicorn.run(app=app, host="0.0.0.0", port=8000)
