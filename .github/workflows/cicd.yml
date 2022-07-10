@@ -28,6 +28,7 @@ jobs:
       - name: "Install project dependencies"
         run: if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      - run: 'echo "PYTHONPATH={$GITHUB_WORKSPACE}/src" >> $GITHUB_ENV'
       - run: "printenv"
 
       - name: "Run tests"
