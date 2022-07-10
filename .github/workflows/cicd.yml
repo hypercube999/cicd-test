@@ -54,6 +54,6 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/${{ github.REPOSITORY_OWNER }}/${{env.IMAGE_NAME}}:${{ github.REF_NAME }}
-          labels: "runnumber=${{ github.RUN_NUMBER }}"
+          labels: runnumber=${{ github.RUN_NUMBER }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
