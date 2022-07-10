@@ -6,7 +6,7 @@ on:
 
 env:
   IMAGE_NAME: "cicd-test"
-  PYTHONPATH: "src/;"
+  PYTHONPATH: "$GITHUB_WORKSPACE/src"
 
 jobs:
 
@@ -27,9 +27,6 @@ jobs:
 
       - name: "Install project dependencies"
         run: if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-      - run: 'echo "PYTHONPATH=$GITHUB_WORKSPACE/src" >> $GITHUB_ENV'
-      - run: "printenv"
 
       - name: "Run tests"
         run: pytest
