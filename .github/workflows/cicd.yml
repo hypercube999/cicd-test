@@ -12,7 +12,7 @@ jobs:
  cicd:
     runs-on: [ubuntu-latest]
     env:
-      PYTHONPATH: ${{ env.GITHUB_WORKSPACE }}/src;${{ env.PYTHONPATH }}
+      PYTHONPATH: ${{ github.WORKSPACE}}/src"
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v2
