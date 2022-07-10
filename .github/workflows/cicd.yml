@@ -42,7 +42,7 @@ jobs:
 #          project-token: ${{ secrets.CODACY_PROJECT_API_TOKEN }}
 #          coverage-reports: ${{ env.COVERAGE_XML_REPORT_PATH }}
 
-  build-and-push-docker:
+  build-and-push-docker-image:
     needs: test-package
     runs-on: ubuntu-latest
     steps:
