@@ -54,20 +54,6 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/${{ github.REPOSITORY_OWNER }}/${{env.IMAGE_NAME}}:${{ github.REF_NAME }}
-          labels: "runnumber=${GITHUB_RUN_ID}"
+          labels: "runnumber=${{ github.RUN_NUMBER }}"
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
-#        run: docker build . --file Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
-#
-#      - name: "Push image"
-#        run: |
-#          IMAGE_ID=ghcr.io/${{ github.REPOSITORY_OWNER }}/$IMAGE_NAME
-#          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-#          VERSION=${{ github.REF_NAME }}
-#
-#          echo IMAGE_ID=$IMAGE_ID
-#          echo VERSION=$VERSION
-#
-#          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-#          docker push $IMAGE_ID:$VERSION
