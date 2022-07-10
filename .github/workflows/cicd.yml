@@ -11,11 +11,13 @@ jobs:
 
  cicd:
     runs-on: [ubuntu-latest]
-    env:
-      PYTHONPATH: "${{ github.WORKSPACE}}/src/;"
+
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v2
+
+      - name: "Add source directories to PYTHONPATH"
+        run: echo "PYTHONPATH=$GITHUB_WORKSPACE/src" >> $GITHUB_ENV
 
       - name: "Install python"
         uses: actions/setup-python@v4
@@ -25,9 +27,6 @@ jobs:
 
       - name: "Install project dependencies"
         run: if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-     # - run: 'echo "PYTHONPATH=$GITHUB_WORKSPACE/src" >> $GITHUB_ENV'
-      #- run: "printenv"
 
       - name: "Run tests"
         run: pytest
@@ -47,17 +46,12 @@ jobs:
 
       - name: "Push image"
         run: |
-          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
-
-          # Change all uppercase to lowercase
+          IMAGE_ID=ghcr.io/${{ github.REPOSITORY_OWNER }}/$IMAGE_NAME
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          # Strip git ref prefix from version
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-          # Strip "v" prefix from tag name
-          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
-          # Use Docker `latest` tag convention
-          [ "$VERSION" == "master" ] && VERSION=latest
+          VERSION=${{ github.REF_NAME }}      
+          
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
+          
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
