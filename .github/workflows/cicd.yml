@@ -11,6 +11,8 @@ jobs:
 
  cicd:
     runs-on: [ubuntu-latest]
+    env:
+      PYTHONPATH: ${{ env.GITHUB_WORKSPACE }}/src;${{ env.PYTHONPATH }}
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v2
@@ -28,8 +30,6 @@ jobs:
       #- run: "printenv"
 
       - name: "Run tests"
-        env:
-          PYTHONPATH: ${{ env.GITHUB_WORKSPACE }}/src;${{ env.PYTHONPATH }}
         run: pytest
 
       - name: "Archive pytest results"
