@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
 jobs:
-  test-package:
+  test-and-coverage-package:
     runs-on: ubuntu-latest
     env:
       COVERAGE_HTML_REPORT_PATH: /tmp/coverage_html_report
@@ -43,7 +43,7 @@ jobs:
 #          coverage-reports: ${{ env.COVERAGE_XML_REPORT_PATH }}
 
   build-and-push-docker-image:
-    needs: test-package
+    needs: test-and-coverage-package
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout repository"
