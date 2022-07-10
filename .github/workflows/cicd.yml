@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v2
-      - name: "Add source directories to PYTHONPATH"
-        run: echo "PYTHONPATH=$GITHUB_WORKSPACE/src" >> $GITHUB_ENV
       - name: "Install python"
         uses: actions/setup-python@v4
         with:
