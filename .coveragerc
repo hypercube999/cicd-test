@@ -10,7 +10,4 @@ exclude_lines =
     raise NotImplementedError
 
 [html]
-directory = coverage-report-html
-
-[xml]
-output = coverage-report.xml
+directory = coverage-report
