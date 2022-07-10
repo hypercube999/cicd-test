@@ -29,7 +29,7 @@ jobs:
 
       - name: "Run tests"
         env:
-          PYTHONPATH: "${{env.GITHUB_WORKSPACE}}/src;${{env.PYTHONPATH}}"
+          PYTHONPATH: "${env.GITHUB_WORKSPACE}/src;${env.PYTHONPATH}"
         run: pytest
 
       - name: "Archive pytest results"
