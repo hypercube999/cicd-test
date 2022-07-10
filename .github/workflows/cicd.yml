@@ -1,11 +1,8 @@
 name: Test CICD
-
 on:
   push:
     branches: [main]
-
 jobs:
-
   test-package:
     runs-on: ubuntu-latest
     steps:
@@ -27,7 +24,6 @@ jobs:
         with:
           name: pytest-report
           path: pytest-report.html
-
   build-and-push-docker:
     needs: test-package
     runs-on: ubuntu-latest
