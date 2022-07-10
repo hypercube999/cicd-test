@@ -38,9 +38,6 @@ jobs:
           name: pytest-report
           path: pytest-report.html
 
-      - name: "Build docker image"
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
-
       - name: "Login to GitHub Container Registry"
         uses: docker/login-action@v2
         with:
@@ -48,14 +45,26 @@ jobs:
           username: ${{ github.ACTOR }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: "Push image"
-        run: |
-          IMAGE_ID=ghcr.io/${{ github.REPOSITORY_OWNER }}/$IMAGE_NAME
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          VERSION=${{ github.REF_NAME }}      
-          
-          echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
-          
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+      - name: "Build and push docker image"
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: ${{ github.REPOSITORY_OWNER }}/$IMAGE_NAME:${{ github.REF_NAME }}
+          label: "runnumber=${GITHUB_RUN_ID}"
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+#        run: docker build . --file Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
+#
+#      - name: "Push image"
+#        run: |
+#          IMAGE_ID=ghcr.io/${{ github.REPOSITORY_OWNER }}/$IMAGE_NAME
+#          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+#          VERSION=${{ github.REF_NAME }}
+#
+#          echo IMAGE_ID=$IMAGE_ID
+#          echo VERSION=$VERSION
+#
+#          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+#          docker push $IMAGE_ID:$VERSION
