@@ -5,7 +5,8 @@ on:
     branches: [main]
 
 env:
-  IMAGE_NAME: cicd-test
+  IMAGE_NAME: "cicd-test"
+  PYTHON_PATH: "./src/;"
 
 jobs:
 
