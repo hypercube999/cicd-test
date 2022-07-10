@@ -8,6 +8,3 @@ source =
 exclude_lines =
     pragma: no cover
     raise NotImplementedError
-
-[html]
-directory = coverage-report
