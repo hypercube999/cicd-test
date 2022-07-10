@@ -6,7 +6,7 @@ on:
 
 env:
   IMAGE_NAME: "cicd-test"
-  PYTHONPATH: "$GITHUB_WORKSPACE/src"
+  PYTHONPATH: "{$GITHUB_WORKSPACE}/src"
 
 jobs:
 
