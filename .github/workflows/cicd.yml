@@ -44,6 +44,8 @@ jobs:
     needs: ["test-and-coverage-package"]
     runs-on: ubuntu-latest
     steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v2
       - name: "Publish package as artifact"
         uses: actions/upload-artifact@v2
         with:
