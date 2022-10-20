@@ -1,6 +1,6 @@
 
-from lib import reverse_array
+from lib import ReverseArray
 
 
 def test_reverse_array():
-    assert reverse_array([1, 2, 3]) == [3, 2, 1]
+    assert ReverseArray([1, 2, 3]) == [3, 2, 1]
