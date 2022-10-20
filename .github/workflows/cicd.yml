@@ -41,10 +41,10 @@ jobs:
           coverage-reports: ${{ env.COVERAGE_XML_REPORT_PATH }}
 
   publish-package-as-artifact:
-    after: test-and-coverage-package
+    needs: ["test-and-coverage-package"]
     steps:
       - name: "Publish package as artifact"
         uses: actions/upload-artifact@v2
         with:
-          name: "Builded package"
+          name: "Built package"
           path: "src"
