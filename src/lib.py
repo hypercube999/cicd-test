@@ -1,7 +1,7 @@
 import numpy as np
 
-# Назовем функциию неправильно, чтобы показать, как работает анализатор кода
-def ReverseArray(arr: np.array):
+
+def reverse_array(arr: np.array):
     arr = arr.copy()
     arr_len = len(arr)
     for i in range(arr_len // 2):
