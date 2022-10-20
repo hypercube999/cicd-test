@@ -42,6 +42,7 @@ jobs:
 
   publish-package-as-artifact:
     needs: ["test-and-coverage-package"]
+    runs-on: ubuntu-latest
     steps:
       - name: "Publish package as artifact"
         uses: actions/upload-artifact@v2
