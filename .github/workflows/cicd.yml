@@ -11,7 +11,7 @@ jobs:
       PYTEST_REPORT_PATH: /tmp/pytest_report.html
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: "Install python"
         uses: actions/setup-python@v4
         with:
@@ -24,7 +24,7 @@ jobs:
       - name: "Generate code coverage html report"
         run: coverage html --directory ${{ env.COVERAGE_HTML_REPORT_PATH }}
       - name: "Archive pytest and coverage reports"
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: ${{!cancelled()}}
         with:
           name: "Test and coverage reports"
@@ -45,9 +45,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: "Publish package as artifact"
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: "Built package"
           path: "src"
